@@ -172,11 +172,13 @@
 
     <script>
         // QR Code
-        new QRCode(document.getElementById("qrcode"), {
-            text: window.location.href,
-            width: 150,
-            height: 150,
-            colorDark: "#0f172a"
+        // QR Code - Endi faqat sizning GitHub manzilingizni ko'rsatadi
+new QRCode(document.getElementById("qrcode"), {
+    text: "https://nurullohabdulazizov12-cmd.github.io/business-card/",
+    width: 150,
+    height: 150,
+    colorDark: "#0f172a"
+});
         });
 
         function toggleQR() {
