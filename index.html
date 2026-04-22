@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurillokh Abdulazizov | KIUT Digital Card</title>
+    <title>Nurillokh Abdulazizov | Digital Card</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Cinzel:wght@600&display=swap');
@@ -27,7 +27,7 @@
         }
 
         .card {
-            width: 360px;
+            width: 350px;
             background: var(--card-bg);
             border-radius: 30px;
             padding: 40px 25px;
@@ -35,19 +35,11 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.6);
             border: 1px solid rgba(197, 160, 89, 0.2);
             position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 6px;
-            background: linear-gradient(90deg, var(--gold), #f3cf44, var(--gold));
         }
 
         .avatar {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             background: var(--gold);
             border-radius: 50%;
             margin: 0 auto 15px;
@@ -55,93 +47,55 @@
             justify-content: center;
             align-items: center;
             font-family: 'Cinzel', serif;
-            font-size: 35px;
+            font-size: 30px;
             color: var(--dark);
             font-weight: bold;
-            box-shadow: 0 0 25px rgba(197, 160, 89, 0.3);
         }
 
-        h1 { margin: 10px 0 5px; font-size: 22px; font-weight: 600; }
+        h1 { margin: 10px 0 5px; font-size: 20px; }
+        .dept { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .cab { font-size: 11px; opacity: 0.7; margin-bottom: 20px; }
+
+        .links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
         
-        .department { 
-            color: var(--gold); 
-            font-size: 13px; 
-            font-weight: 600;
-            text-transform: uppercase; 
-            letter-spacing: 1.5px; 
-            margin-bottom: 5px;
-        }
-
-        .cabinet {
-            background: rgba(197, 160, 89, 0.1);
-            color: var(--gold);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            display: inline-block;
-            margin-bottom: 25px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-        }
-
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
         .link-item {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 14px;
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 12px;
             text-decoration: none;
             color: var(--white);
             font-size: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
 
-        .link-item:hover {
-            background: var(--gold);
-            color: var(--dark);
-            transform: translateY(-3px);
-            font-weight: 600;
-        }
+        .link-item:hover { background: var(--gold); color: var(--dark); }
 
-        .save-btn {
+        .btn-main {
             background: var(--white);
             color: var(--dark);
             border: none;
-            padding: 16px;
+            padding: 15px;
             border-radius: 50px;
             font-weight: 700;
             width: 100%;
             cursor: pointer;
-            transition: 0.3s;
             text-transform: uppercase;
             font-size: 12px;
-            letter-spacing: 1px;
         }
 
-        .save-btn:hover {
-            background: var(--gold);
-            color: var(--white);
-            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
-        }
-
+        /* 🟢 QR-kod oynasi sozlamalari */
         #qr-overlay {
-    margin-top: 20px;
-    display: none; /* Boshida yashirin turadi */
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    animation: fadeIn 0.3s ease;
-}
+            display: none; /* Boshida yashirin */
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        #qrcode img { margin: 0 auto; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -150,66 +104,59 @@
 
     <div class="card">
         <div class="avatar">NA</div>
-        
         <h1>Nurillokh Abdulazizov</h1>
-        <div class="department">International Relations Department</div>
-        <div class="cabinet">📍 Cabinet A205</div>
+        <div class="dept">International Relations Department</div>
+        <div class="cab">📍 Cabinet A205</div>
 
         <div class="links">
             <a href="tel:+998500734916" class="link-item">📞 +998 50 073 49 16</a>
-            <a href="mailto:nurullohabdulazizov12@gmail.com" class="link-item">✉️ nurullohabdulazizov12@gmail.com</a>
-            <a href="https://t.me/N_Abdulazizov" target="_blank" class="link-item">✈️ Telegram Profile</a>
-            <a href="https://instagram.com/n.abdulazizovv" target="_blank" class="link-item">📸 Instagram</a>
+            <a href="mailto:nurullohabdulazizov12@gmail.com" class="link-item">✉️ Email Me</a>
+            <a href="https://t.me/N_Abdulazizov" target="_blank" class="link-item">✈️ Telegram</a>
         </div>
 
-        <button class="save-btn" onclick="downloadVCF()">Save Contact Information</button>
-        <p onclick="toggleQR()" style="font-size: 11px; cursor: pointer; margin-top: 20px; color: #64748b; text-decoration: underline;">Share QR Code</p>
+        <button class="btn-main" onclick="downloadVCF()">Save Contact</button>
+        
+        <p id="toggleBtn" onclick="toggleQR()" style="font-size: 11px; cursor: pointer; margin-top: 20px; color: var(--gold); text-decoration: underline;">
+            Share QR Code
+        </p>
 
         <div id="qr-overlay">
-            <div id="qrcode" style="display: flex; justify-content: center;"></div>
-            <p style="color: #333; font-size: 10px; margin-top: 8px;">Scan to open my digital card</p>
+            <div id="qrcode"></div>
+            <p style="color: #333; font-size: 10px; margin-top: 10px;">Scan to open card</p>
         </div>
     </div>
 
     <script>
-        // QR Code
-        // QR Code - Endi faqat sizning GitHub manzilingizni ko'rsatadi
-new QRCode(document.getElementById("qrcode"), {
-    text: "https://nurullohabdulazizov12-cmd.github.io/business-card/",
-    width: 150,
-    height: 150,
-    colorDark: "#0f172a"
-});
+        // 1. QR kodni sayt yuklanishi bilan yaratib qo'yamiz
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "https://nurullohabdulazizov12-cmd.github.io/business-card/",
+            width: 150,
+            height: 150,
+            colorDark : "#0f172a",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
         });
 
+        // 2. Oynani ochish/yopish funksiyasi
         function toggleQR() {
-            const qr = document.getElementById('qr-overlay');
-            qr.style.display = qr.style.display === 'block' ? 'none' : 'block';
+            var qrBox = document.getElementById("qr-overlay");
+            if (qrBox.style.display === "none" || qrBox.style.display === "") {
+                qrBox.style.display = "block";
+                qrBox.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                qrBox.style.display = "none";
+            }
         }
 
-        // Professional vCard (VCF) Function
+        // 3. Kontaktni saqlash funksiyasi
         function downloadVCF() {
-            const vCardData = [
-                "BEGIN:VCARD",
-                "VERSION:3.0",
-                "FN:Nurillokh Abdulazizov",
-                "ORG:Kimyo International University;International Relations Department",
-                "TITLE:Cabinet A205",
-                "TEL;TYPE=CELL:+998500734916",
-                "EMAIL:nurullohabdulazizov12@gmail.com",
-                "X-SOCIALPROFILE;TYPE=telegram:https://t.me/N_Abdulazizov",
-                "X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/n.abdulazizovv",
-                "END:VCARD"
-            ].join("\n");
-
-            const blob = new Blob([vCardData], { type: "text/vcard" });
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
+            var vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Nurillokh Abdulazizov\nORG:KIUT;International Relations\nTEL;TYPE=CELL:+998500734916\nEMAIL:nurullohabdulazizov12@gmail.com\nEND:VCARD";
+            var blob = new Blob([vCardData], { type: "text/vcard" });
+            var url = window.URL.createObjectURL(blob);
+            var link = document.createElement('a');
             link.href = url;
-            link.download = 'Nurillokh_Abdulazizov.vcf';
-            document.body.appendChild(link);
+            link.download = 'Nurillokh.vcf';
             link.click();
-            document.body.removeChild(link);
         }
     </script>
 </body>
