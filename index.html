@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurillokh | Future Card</title>
+    <title>Nurillokh | Future Card Elite</title>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -11,120 +12,181 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #020617;
+        :root {
+            --gold: #c5a059;
+            --dark: #020617;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
-        /* 🌌 Zarrachalar foni */
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background: var(--dark);
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* 🌌 Orqa fon zarrachalari */
         #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            position: absolute; width: 100%; height: 100%;
             z-index: 1;
         }
 
         .container {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            perspective: 1000px;
+            position: relative; z-index: 2;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; perspective: 1000px;
         }
 
-        /* ✨ Shishali Karta (Glassmorphism) */
+        /* ✨ 3D Neon Karta */
         .card {
             width: 320px;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
             border-radius: 25px;
             text-align: center;
             color: white;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
             transform-style: preserve-3d;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        /* 💫 Aylanuvchi Neon Hoshiya */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--gold));
+            animation: rotateNeon 4s linear infinite;
+            z-index: -2;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: #0f172a;
+            border-radius: 22px;
+            z-index: -1;
+        }
+
+        @keyframes rotateNeon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .profile-img {
-            width: 110px;
-            height: 110px;
+            width: 110px; height: 110px;
             border-radius: 50%;
-            border: 3px solid #c5a059;
-            margin-bottom: 15px;
-            box-shadow: 0 0 20px #c5a059;
+            border: 3px solid var(--gold);
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px var(--gold);
             object-fit: cover;
         }
 
-        h1 {
+        /* ⌨️ Typewriter Animatsiyasi */
+        .typewriter {
+            margin-bottom: 5px;
+        }
+
+        .typewriter h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 18px;
-            letter-spacing: 2px;
-            margin: 10px 0;
-            color: #c5a059;
+            color: var(--gold);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid var(--gold);
+            margin: 0 auto;
+            width: 0;
+            animation: 
+                typing 3s steps(22, end) forwards,
+                blink 0.8s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
         }
 
         .dept {
-            font-family: 'Poppins', sans-serif;
             font-size: 10px;
             text-transform: uppercase;
-            opacity: 0.8;
-            margin-bottom: 25px;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            margin-bottom: 30px;
         }
 
         .links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            display: flex; flex-direction: column; gap: 12px;
         }
 
         .link-item {
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 12px;
             text-decoration: none;
             color: white;
             font-size: 13px;
-            transition: 0.3s;
-            border: 1px solid transparent;
+            font-weight: 600;
+            transition: 0.3s ease;
         }
 
         .link-item:hover {
-            background: rgba(197, 160, 89, 0.2);
-            border-color: #c5a059;
-            transform: translateZ(20px);
+            background: var(--gold);
+            color: var(--dark);
+            transform: translateZ(30px);
+            box-shadow: 0 0 20px var(--gold);
         }
 
         .qr-btn {
-            margin-top: 25px;
-            background: #c5a059;
-            color: #020617;
-            border: none;
-            padding: 12px 25px;
+            margin-top: 30px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 20px;
             border-radius: 30px;
-            font-weight: bold;
             cursor: pointer;
             font-family: 'Orbitron', sans-serif;
             font-size: 10px;
+            transition: 0.3s;
+        }
+
+        .qr-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
         }
 
         #qr-modal {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 20px;
-            z-index: 100;
+            z-index: 1000;
+            text-align: center;
         }
+
+        #qr-modal.active { display: block; }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 999;
+        }
+
+        .overlay.active { display: block; }
     </style>
 </head>
 <body>
@@ -132,55 +194,59 @@
     <div id="particles-js"></div>
 
     <div class="container">
-        <div class="card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">
+        <div class="card" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.2">
             <img src="Nurillokh.jpg" class="profile-img" alt="Nurillokh">
-            <h1>Nurillokh Abdulazizov</h1>
+            
+            <div class="typewriter">
+                <h1>Nurillokh Abdulazizov</h1>
+            </div>
+            
             <div class="dept">International Relations Department</div>
             
             <div class="links">
-                <a href="tel:+998500734916" class="link-item">📞 CALL ME</a>
-                <a href="https://t.me/N_Abdulazizov" class="link-item">✈️ TELEGRAM</a>
-                <a href="mailto:nurullohabdulazizov12@gmail.com" class="link-item">✉️ EMAIL</a>
+                <a href="tel:+998500734916" class="link-item">📞 CALL MOBILE</a>
+                <a href="https://t.me/N_Abdulazizov" target="_blank" class="link-item">✈️ TELEGRAM</a>
+                <a href="mailto:nurullohabdulazizov12@gmail.com" class="link-item">✉️ SEND EMAIL</a>
             </div>
 
-            <button class="qr-btn" onclick="toggleQR()">GENERATE QR SCAN</button>
+            <button class="qr-btn" onclick="toggleQR()">SHARE CONTACT</button>
         </div>
     </div>
 
-    <div id="qr-modal" onclick="this.style.display='none'">
+    <div class="overlay" id="overlay" onclick="toggleQR()"></div>
+    <div id="qr-modal">
         <div id="qrcode"></div>
+        <p style="color: black; font-size: 10px; margin-top: 15px;">Scan to open my card</p>
     </div>
 
     <script>
-        // 1. Zarrachalar (Particles) sozlamalari
+        // 1. Particles Config
         particlesJS('particles-js', {
             particles: {
                 number: { value: 80 },
                 color: { value: '#c5a059' },
                 shape: { type: 'circle' },
-                opacity: { value: 0.5 },
+                opacity: { value: 0.4 },
                 size: { value: 3 },
-                line_linked: { enable: true, distance: 150, color: '#c5a059', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2 }
+                line_linked: { enable: true, distance: 150, color: '#c5a059', opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 1.5 }
             },
             interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } }
+                events: { onhover: { enable: true, mode: 'repulse' } }
             }
         });
 
-        // 2. QR Kod
+        // 2. QR Code
         new QRCode(document.getElementById("qrcode"), {
             text: window.location.href,
-            width: 200,
-            height: 200
+            width: 180,
+            height: 180
         });
 
         function toggleQR() {
-            const modal = document.getElementById('qr-modal');
-            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('qr-modal').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
         }
     </script>
 </body>
-</html>
 </html>
