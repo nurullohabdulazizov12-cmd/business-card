@@ -37,21 +37,35 @@
             position: relative;
         }
 
-     .profile-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto 15px;
-    border: 3px solid var(--gold);
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
-}
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 15px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
         }
 
         h1 { margin: 10px 0 5px; font-size: 20px; }
         .dept { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         .cab { font-size: 11px; opacity: 0.7; margin-bottom: 20px; }
+
+        /* Statistika dizayni */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+        }
+        .stat-box span { font-size: 16px; font-weight: bold; color: var(--gold); display: block; }
+        .stat-box p { font-size: 8px; margin: 0; text-transform: uppercase; opacity: 0.6; }
 
         .links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
         
@@ -81,29 +95,33 @@
             font-size: 12px;
         }
 
-        /* 🟢 QR-kod oynasi sozlamalari */
         #qr-overlay {
-            display: none; /* Boshida yashirin */
+            display: none;
             margin-top: 20px;
             background: white;
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s ease;
         }
 
         #qrcode img { margin: 0 auto; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div class="card">
         <img src="Nurillokh.jpg" class="profile-img" alt="Nurillokh">
+        
         <h1>Nurillokh Abdulazizov</h1>
         <div class="dept">International Relations Department</div>
         <div class="cab">📍 Cabinet A205</div>
+
+        <div class="stats-container">
+            <div class="stat-box">
+                <span id="visit-count">0</span>
+                <p>Profile Views</p>
+            </div>
+        </div>
 
         <div class="links">
             <a href="tel:+998500734916" class="link-item">📞 +998 50 073 49 16</a>
@@ -113,7 +131,7 @@
 
         <button class="btn-main" onclick="downloadVCF()">Save Contact</button>
         
-        <p id="toggleBtn" onclick="toggleQR()" style="font-size: 11px; cursor: pointer; margin-top: 20px; color: var(--gold); text-decoration: underline;">
+        <p onclick="toggleQR()" style="font-size: 11px; cursor: pointer; margin-top: 20px; color: var(--gold); text-decoration: underline;">
             Share QR Code
         </p>
 
@@ -124,28 +142,28 @@
     </div>
 
     <script>
-        // 1. QR kodni sayt yuklanishi bilan yaratib qo'yamiz
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
+        // 1. QR kod yaratish
+        new QRCode(document.getElementById("qrcode"), {
             text: "https://nurullohabdulazizov12-cmd.github.io/business-card/",
             width: 150,
             height: 150,
             colorDark : "#0f172a",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
+            colorLight : "#ffffff"
         });
 
-        // 2. Oynani ochish/yopish funksiyasi
+        // 2. Statistika funksiyasi (LocalStorage - sizning brauzeringizda saqlaydi)
+        // Haqiqiy global statistika uchun CountAPI ba'zan sekin, shuning uchun sodda usul:
+        let views = localStorage.getItem('onchain_views') || 0;
+        views++;
+        localStorage.setItem('onchain_views', views);
+        document.getElementById('visit-count').innerText = views;
+
         function toggleQR() {
             var qrBox = document.getElementById("qr-overlay");
-            if (qrBox.style.display === "none" || qrBox.style.display === "") {
-                qrBox.style.display = "block";
-                qrBox.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                qrBox.style.display = "none";
-            }
+            qrBox.style.display = (qrBox.style.display === "block") ? "none" : "block";
+            if(qrBox.style.display === "block") qrBox.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 3. Kontaktni saqlash funksiyasi
         function downloadVCF() {
             var vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Nurillokh Abdulazizov\nORG:KIUT;International Relations\nTEL;TYPE=CELL:+998500734916\nEMAIL:nurullohabdulazizov12@gmail.com\nEND:VCARD";
             var blob = new Blob([vCardData], { type: "text/vcard" });
