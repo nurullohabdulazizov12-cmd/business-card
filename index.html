@@ -3,176 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurillokh Abdulazizov | Digital Card</title>
+    <title>Nurillokh | Future Card</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Cinzel:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
 
-        :root {
-            --dark: #0f172a;
-            --card-bg: #1e293b;
-            --gold: #c5a059;
-            --white: #f8fafc;
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #020617;
         }
 
-        body {
-            background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
-            font-family: 'Poppins', sans-serif;
+        /* 🌌 Zarrachalar foni */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            color: var(--white);
+            height: 100vh;
+            perspective: 1000px;
         }
 
+        /* ✨ Shishali Karta (Glassmorphism) */
         .card {
-            width: 350px;
-            background: var(--card-bg);
-            border-radius: 30px;
-            padding: 40px 25px;
+            width: 320px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            position: relative;
+            color: white;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+            transform-style: preserve-3d;
         }
 
         .profile-img {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
+            border: 3px solid #c5a059;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px #c5a059;
             object-fit: cover;
-            display: block;
-            margin: 0 auto 15px;
-            border: 3px solid var(--gold);
-            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
         }
 
-        h1 { margin: 10px 0 5px; font-size: 20px; }
-        .dept { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .cab { font-size: 11px; opacity: 0.7; margin-bottom: 20px; }
-
-        /* Statistika dizayni */
-        .stats-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .stat-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 8px 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(197, 160, 89, 0.1);
-        }
-        .stat-box span { font-size: 16px; font-weight: bold; color: var(--gold); display: block; }
-        .stat-box p { font-size: 8px; margin: 0; text-transform: uppercase; opacity: 0.6; }
-
-        .links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
-        
-        .link-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--white);
-            font-size: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            margin: 10px 0;
+            color: #c5a059;
         }
 
-        .link-item:hover { background: var(--gold); color: var(--dark); }
-
-        .btn-main {
-            background: var(--white);
-            color: var(--dark);
-            border: none;
-            padding: 15px;
-            border-radius: 50px;
-            font-weight: 700;
-            width: 100%;
-            cursor: pointer;
+        .dept {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
             text-transform: uppercase;
-            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 25px;
         }
 
-        #qr-overlay {
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-item {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 13px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .link-item:hover {
+            background: rgba(197, 160, 89, 0.2);
+            border-color: #c5a059;
+            transform: translateZ(20px);
+        }
+
+        .qr-btn {
+            margin-top: 25px;
+            background: #c5a059;
+            color: #020617;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+        }
+
+        #qr-modal {
             display: none;
-            margin-top: 20px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: white;
             padding: 20px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 100;
         }
-
-        #qrcode img { margin: 0 auto; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <img src="Nurillokh.jpg" class="profile-img" alt="Nurillokh">
-        
-        <h1>Nurillokh Abdulazizov</h1>
-        <div class="dept">International Relations Department</div>
-        <div class="cab">📍 Cabinet A205</div>
+    <div id="particles-js"></div>
 
-        <div class="stats-container">
-            <div class="stat-box">
-                <span id="visit-count">0</span>
-                <p>Profile Views</p>
+    <div class="container">
+        <div class="card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">
+            <img src="Nurillokh.jpg" class="profile-img" alt="Nurillokh">
+            <h1>Nurillokh Abdulazizov</h1>
+            <div class="dept">International Relations Department</div>
+            
+            <div class="links">
+                <a href="tel:+998500734916" class="link-item">📞 CALL ME</a>
+                <a href="https://t.me/N_Abdulazizov" class="link-item">✈️ TELEGRAM</a>
+                <a href="mailto:nurullohabdulazizov12@gmail.com" class="link-item">✉️ EMAIL</a>
             </div>
-        </div>
 
-        <div class="links">
-            <a href="tel:+998500734916" class="link-item">📞 +998 50 073 49 16</a>
-            <a href="mailto:nurullohabdulazizov12@gmail.com" class="link-item">✉️ Email Me</a>
-            <a href="https://t.me/N_Abdulazizov" target="_blank" class="link-item">✈️ Telegram</a>
-        </div>
-
-        <button class="btn-main" onclick="downloadVCF()">Save Contact</button>
-        
-        <p onclick="toggleQR()" style="font-size: 11px; cursor: pointer; margin-top: 20px; color: var(--gold); text-decoration: underline;">
-            Share QR Code
-        </p>
-
-        <div id="qr-overlay">
-            <div id="qrcode"></div>
-            <p style="color: #333; font-size: 10px; margin-top: 10px;">Scan to open card</p>
+            <button class="qr-btn" onclick="toggleQR()">GENERATE QR SCAN</button>
         </div>
     </div>
 
+    <div id="qr-modal" onclick="this.style.display='none'">
+        <div id="qrcode"></div>
+    </div>
+
     <script>
-        // 1. QR kod yaratish
-        new QRCode(document.getElementById("qrcode"), {
-            text: "https://nurullohabdulazizov12-cmd.github.io/business-card/",
-            width: 150,
-            height: 150,
-            colorDark : "#0f172a",
-            colorLight : "#ffffff"
+        // 1. Zarrachalar (Particles) sozlamalari
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80 },
+                color: { value: '#c5a059' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3 },
+                line_linked: { enable: true, distance: 150, color: '#c5a059', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2 }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } }
+            }
         });
 
-        // 2. Statistika funksiyasi (LocalStorage - sizning brauzeringizda saqlaydi)
-        // Haqiqiy global statistika uchun CountAPI ba'zan sekin, shuning uchun sodda usul:
-        let views = localStorage.getItem('onchain_views') || 0;
-        views++;
-        localStorage.setItem('onchain_views', views);
-        document.getElementById('visit-count').innerText = views;
+        // 2. QR Kod
+        new QRCode(document.getElementById("qrcode"), {
+            text: window.location.href,
+            width: 200,
+            height: 200
+        });
 
         function toggleQR() {
-            var qrBox = document.getElementById("qr-overlay");
-            qrBox.style.display = (qrBox.style.display === "block") ? "none" : "block";
-            if(qrBox.style.display === "block") qrBox.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function downloadVCF() {
-            var vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Nurillokh Abdulazizov\nORG:KIUT;International Relations\nTEL;TYPE=CELL:+998500734916\nEMAIL:nurullohabdulazizov12@gmail.com\nEND:VCARD";
-            var blob = new Blob([vCardData], { type: "text/vcard" });
-            var url = window.URL.createObjectURL(blob);
-            var link = document.createElement('a');
-            link.href = url;
-            link.download = 'Nurillokh.vcf';
-            link.click();
+            const modal = document.getElementById('qr-modal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 </body>
+</html>
 </html>
